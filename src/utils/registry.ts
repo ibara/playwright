@@ -171,7 +171,7 @@ export const hostPlatform = ((): BrowserPlatform => {
     const archSuffix = arm64 ? '-arm64' : '';
     return `mac${macVersion}${archSuffix}` as BrowserPlatform;
   }
-  if (platform === 'linux') {
+  if (platform === 'openbsd') {
     const ubuntuVersion = getUbuntuVersionSync();
     if (parseInt(ubuntuVersion, 10) <= 19)
       return 'ubuntu18.04';
@@ -192,7 +192,7 @@ export const registryDirectory = (() => {
     result = envDefined;
   } else {
     let cacheDirectory: string;
-    if (process.platform === 'linux')
+    if (process.platform === 'openbsd')
       cacheDirectory = process.env.XDG_CACHE_HOME || path.join(os.homedir(), '.cache');
     else if (process.platform === 'darwin')
       cacheDirectory = path.join(os.homedir(), 'Library', 'Caches');
